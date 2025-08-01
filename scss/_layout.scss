@@ -1,0 +1,200 @@
+// scss/_layout.scss
+@import 'variables';
+@import 'mixins';
+@import 'base';
+
+/* NAVIGATION */
+.nav {
+  background: $color-hero-bg;
+  color: $color-text-light;
+  position: sticky; top:0; z-index:1000;
+  .nav__inner {
+    @extend .container;
+    display:flex; justify-content:space-between; align-items:center;
+    padding: 1rem 0;
+  }
+  .nav__logo {
+    font-size:1.125rem; font-weight:700; color:$color-text-light;
+  }
+  .nav__links {
+    display:flex; gap:2rem;
+  }
+  .nav__link {
+    font-size:1rem; font-weight:600; color:$color-text-light;
+    text-decoration:none; position:relative;
+    &:hover { color:$color-accent; }
+    &::after {
+      content:''; position:absolute; bottom:-4px; left:0;
+      width:100%; height:2px; background:$color-accent;
+      transform: scaleX(0); transform-origin:left;
+      transition: transform $transition-speed ease;
+    }
+    &:hover::after { transform: scaleX(1); }
+  }
+}
+
+/* HERO */
+.hero {
+  background: $color-hero-bg;
+  color: $color-text-light;
+  padding: 8rem 0 6rem;
+  text-align: left;
+  .hero__inner {
+    @extend .container;
+    display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:2rem;
+    @include respond-to(mobile) { grid-template-columns:1fr; text-align:center; }
+  }
+  .hero__title {
+    font-size: clamp(3rem, 8vw, 5rem);
+    line-height:1.1; margin-bottom:1rem;
+    animation: fadeInUp 0.8s both;
+  }
+  .hero__subtitle {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    margin-bottom:2rem; opacity:0.9;
+    animation: fadeInUp 0.8s both 0.3s;
+  }
+  .hero__cta {
+    display:inline-block;
+    font-size:1rem; font-weight:600;
+    padding:0.75rem 1.5rem;
+    background:transparent; border:2px solid $color-text-light;
+    color:$color-text-light; border-radius:0.375rem;
+    transition: background $transition-speed ease, color $transition-speed ease;
+    animation: fadeInUp 0.8s both 0.6s;
+    &:hover {
+      background:$color-text-light; color:$color-hero-bg;
+    }
+  }
+  .hero__image img {
+    width:100%; max-width:320px; border-radius:50%;
+    box-shadow:0 10px 20px rgba(0,0,0,0.2);
+    animation: fadeInUp 0.8s both 0.9s;
+  }
+}
+
+/* SECTIONS (Work, About, Fun/Contact) */
+section {
+  background: $color-body-bg;
+  padding:6rem 0;
+  .section__title {
+    color: $color-text-dark;
+    margin-bottom:3rem;
+  }
+}
+
+/* WORK Grid */
+.work__grid {
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
+  gap:2rem;
+}
+.work__card {
+  position:relative; overflow:hidden; border-radius:0.5rem;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  background:#fff;
+  &:hover .work__meta { transform: translateY(0); }
+}
+.work__bg {
+  height:300px; background-size:cover; background-position:center;
+  transition: transform 0.5s ease;
+}
+.work__card:hover .work__bg { transform: scale(1.05); }
+.work__meta {
+  position:absolute; bottom:0; left:0; width:100%;
+  background: rgba(255,255,255,0.9); color:$color-text-dark;
+  padding:1.5rem; transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+.work__link {
+  color:$color-hero-bg; font-weight:600;
+  text-decoration:none; margin-top:0.5rem; display:inline-block;
+  transition: color $transition-speed ease;
+}
+.work__link:hover { color:$color-accent; }
+
+/* ABOUT */
+.about__inner {
+  @extend .container;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+
+  @include respond-to(mobile) {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+.about__image img {
+    width: 100%;
+    max-width: 20px; // Or 25% or any size you want
+    height: auto;
+    border-radius: 10px; // optional for styling
+    margin: 0 auto; // center the image on mobile
+  }
+}
+
+/* FUN / CONTACT CTA */
+.contact-cta {
+  text-align:center;
+  .icon-btn {
+    display:inline-block; font-size:2rem; margin:0 1rem;
+    width:60px; height:60px; line-height:60px; border-radius:50%;
+    color:$color-hero-bg; border:2px solid $color-hero-bg;
+    transition: background $transition-speed ease;
+    &:hover { background:$color-hero-bg; color:$color-text-light; }
+  }
+}
+
+/* FOOTER */
+.footer {
+  text-align:center; padding:2rem 0;
+  color:$color-text-dark; font-size:0.875rem;
+}
+
+/*--------------------------------------------------------------
+   8. Case‐Study Page Overrides
+--------------------------------------------------------------*/
+
+.Project1 {
+  // NAV on case study → white background, dark links
+  .nav {
+    background: $color-body-bg;  // pure white
+    .nav__logo,
+    .nav__link {
+      color: $color-text-dark !important;
+    }
+    .nav__cta {
+      // optional: keep button accent
+      background: $color-accent;
+      color: #fff;
+    }
+  }
+
+  // HERO on case study → white background, dark text
+  .hero {
+    background: $color-body-bg;  // white
+    clip-path: none;             // remove any clipping
+    color: $color-text-dark;
+
+    &__title,
+    &__subtitle,
+    &__cta {
+      color: $color-text-dark !important;
+    }
+
+    &__cta {
+      // restyle as a dark‐on‐white button
+      background: $color-text-dark;
+      color: #fff;
+      border: none;
+      &:hover {
+        background: darken($color-text-dark, 10%);
+      }
+    }
+
+    // remove accent blobs if present
+    &__accent {
+      display: none;
+    }
+  }
+}

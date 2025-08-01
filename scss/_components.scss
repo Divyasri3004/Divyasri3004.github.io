@@ -1,0 +1,102 @@
+@import 'variables';
+@import 'mixins';
+@import 'base';
+
+/* Reveal on Scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Buttons & Links */
+.hero__cta,
+button {
+  display: inline-block;
+  background: $color-primary;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+/* Work Card Meta Link */
+.work__link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: $color-accent;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: lighten($color-accent, 10%);
+  }
+}
+
+/* Icon Buttons in Contact CTA */
+.icon-btn {
+  font-size: 2rem;
+  display: inline-block;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  width: 60px; height: 60px;
+  line-height: 60px;
+  text-align: center;
+  border-radius: 50%;
+  transition: background 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    background: rgba(255,255,255,0.2);
+    transform: scale(1.1);
+  }
+}
+
+/*--------------------------------------------------------------
+   Case Study Featured Image (Reduced Size)
+--------------------------------------------------------------*/
+.case-image-section {
+  padding: 2rem 0;  // less vertical space
+
+  .case-image {
+    display: block;
+    width: 50%;
+    max-width: 300px;    // limit width
+    max-height: 300px;   // limit height
+    height: auto;        // preserve aspect ratio
+    margin: 0 auto;      // center
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+    @include respond-to(mobile) {
+      max-width: 100%;
+      max-height: none;
+    }
+  }
+}
+
+.exhibition-image-section {
+  max-width: 60px; // Reduced from likely full-width
+  width: 10%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  border: 3px solid #2a2a2a;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  
+  &__container {
+    padding: 1rem 0;
+    text-align: center;
+  }
+}
